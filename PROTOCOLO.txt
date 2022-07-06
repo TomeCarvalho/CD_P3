@@ -1,0 +1,47 @@
+Todas as mensagens enviadas PARA O BROKER possuem 1 byte que indica o tipo de conversão que o
+Broker deverá fazer.
+0 -> JSON
+1 -> XML
+2 -> PICKLE
+
+Em seguida. Todas as mensagens possuem 2 bytes que indicam o length da mensagem a ser capturada.
+
+Subscription
+Objetivo: Consumidor fazer uma subscrição em um tópico
+Destino: Broker
+Mensagem:
+{"method":"SUBSCRIBE", "topic": topic_str}
+
+Publicate
+Objetivo: Produtor publicar uma mensagem em um tópico
+Destino: Broker
+Mensagem:
+{"method":"PUBLICATE", "args":{"msg": message, "topic": topic_str}}
+
+Send message:
+Objetivo: Enviar para um consumidor uma mensagem
+Destino: Middleware
+Mensagem:
+{"method": "SEND", "data": text}
+
+Unsubscribe topic request:
+Objetivo: Consumidor deseja cancelar de um determinado tópico
+Destino: Broker
+Mensagem:
+{"method": "UNSUBSCRIBE", "topic": topic_str}
+
+Request all topics:
+Objetivo: Middleware deseja saber todos os tópicos existentes no Broker
+Destino: Broker
+Mensagem:
+{"method": "REQ_TOPICS"}
+
+Respond all topics:
+Objetivo: Broker responde o Middleware contendo a lista de todos os tópicos
+Destino: Middleware
+Mensagem:
+{"method": "REP_TOPICS", "lst": list}
+
+
+
+
